@@ -32,4 +32,20 @@ class JobRepository extends EntityRepository
 
         return $qb->getQuery()->getResult();
     }
+
+    /**
+     * @param int $id
+     * @return Job|null
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function findActiveJob(int $id) : ?Job
+    {
+        return $this->createQueryBuilder('j')
+            ->where('j.id = :id')
+                ->andWhere('j.expiresAt > :date')
+            ->setParameter('id', $id)
+            ->setParameter('date', new \DateTime())
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 }
