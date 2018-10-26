@@ -14,7 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Class Job
  * @package App\Entity
  *
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="App\Repository\JobRepository")
  * @ORM\Table(name="jobs")
  * @ORM\HasLifecycleCallbacks()
  */
